@@ -13,3 +13,15 @@ function stringRepeat(str, num) {
   }
   return s;
 }
+
+//use Recursive
+function stringRp(st, num) {
+  if (num < 0) {
+    return "";
+  }
+  if (num === 0) {
+    return st;
+  } else {
+    return st + stringRp(st, num - 1);
+  }
+}
