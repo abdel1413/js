@@ -19,9 +19,9 @@ function reverser(st) {
 
 function rev(str) {
   let spl = str.split("");
-  console.log("split", spl);
+
   let revers = spl.reverse();
-  console.log("rever", revers);
+
   let jn = revers.join("");
   return jn;
 }

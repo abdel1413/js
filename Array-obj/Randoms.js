@@ -15,7 +15,7 @@ Math.floor(Math.random() * size);
 //ie add min
 Math.floor(Math.random() * size) + min;
 //now it will start counting from 7 instead
-//of form 0
+//of from 0
 
 function randomNumbers(parm1, parm2) {
   return Math.floor(Math.random() * size) + min;
