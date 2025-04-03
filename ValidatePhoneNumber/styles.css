@@ -1,0 +1,66 @@
+body {
+  background-color: #3b3b4f;
+  text-align: center;
+  color: black;
+}
+
+h1 {
+  color: #fff;
+}
+
+#container {
+  background-color: #000000;
+  height: 480px;
+  margin: 0 auto;
+  width: 250px;
+  border-radius: 20px;
+  padding: 15px;
+}
+#camera {
+  background-color: #ffff;
+  height: 11px;
+  width: 10px;
+  border-radius: 50%;
+  margin: 10px auto;
+}
+label {
+  display: block;
+  background-color: #dfdfe2;
+  color: black;
+  padding: 10px;
+  font-size: 1.4rem;
+  margin-top: 30px;
+}
+
+.phone-details {
+  border: 1px solid blue;
+  background-color: #dfdfe2;
+  height: 400px;
+}
+
+#user-input {
+  border: 1px solid black;
+  padding: 10px;
+  width: 200px;
+  margin: 0;
+  border-radius: 10px;
+}
+.p-tag {
+  color: forestgreen;
+}
+
+.danger-color {
+  color: rgb(228, 50, 50);
+}
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+#check-btn,
+#clear-btn {
+  font-size: 1.3rem;
+  width: 100px;
+}
