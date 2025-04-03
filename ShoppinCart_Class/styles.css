@@ -20,7 +20,7 @@
 }
 body {
   background-color: var(--dark-grey);
-  color: var(--light-grey);
+  /* color: var(--light-grey); */
 }
 #title {
   color: var(--light-grey);
