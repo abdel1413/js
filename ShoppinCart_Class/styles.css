@@ -72,10 +72,10 @@ body {
 
 #cart-container {
   position: absolute;
-  top: 60px;
+  top: 30px;
   right: 0;
   background-color: var(--light-grey);
-  height: 400px;
+  /* height: 200px; */
   width: 200px;
   border: 8px double var(--dark-grey);
   border-radius: 15px;
@@ -83,6 +83,11 @@ body {
   text-align: center;
   font-size: 1.2rem;
 }
+
+/* #clear-cart-btn {
+  float: right;
+  clear: both;
+} */
 
 .product {
   margin: 25px 0;

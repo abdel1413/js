@@ -12,12 +12,17 @@
          <h1 id='title'>Dessert Page</h1>
      </header>
      <main>
-         <button type="button" class="btn" id="cart-btn"><span class="show-hide-cart">Show</span> Cart</button>
-         <div id='products-container'></div>
-         <p> Total number of items:<span id='total-items'>0</span></p>
+         <button type="button" class="btn" id="cart-btn">
+             <span id="show-hide-cart">Show</span> Cart
+            </button>
+            <div id="cart-container">
+             <button class="btn" id="clear-cart-btn">Clear Cart</button>
+         <div id='selected-products-container'></div>
+         <p> Number of items:<span id='total-items'>0</span></p>
          <p> subTotal:<span id='sub-total'>$0</span></p>
          <p> taxes:<span id='taxes'>$0</span></p>
          <p> Total:<span id='total'>$0</span></p>
+        </div>
          <div id='dessert-cart-container'></div>
         </main>
 <script src="./script.js"></script>

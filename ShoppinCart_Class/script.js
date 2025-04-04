@@ -1,4 +1,15 @@
 const dessertCartContainer = document.getElementById("dessert-cart-container");
+const cartBtn = document.getElementById("cart-btn");
+const showHideCart = document.getElementById("show-hide-cart");
+const cartContainer = document.getElementById("cart-container");
+const selectedProductsContainer = document.getElementById(
+  "selected-products-container"
+);
+
+const totalItems = document.getElementById("total-items");
+
+let isCartShowing = false;
+
 const products = [
   {
     id: 1,
@@ -83,4 +94,72 @@ products.forEach(({ id, name, category, price }) => {
      <buttin id="${id}"
      class="btn add-to-cart-btn">Add to Cart</button>
      </div>`;
+});
+
+class ShoppingCart {
+  constructor() {
+    this.items = [];
+    this.total = 0;
+    this.taxRate = 8.25;
+  }
+
+  addProduct(id, products) {
+    const product = products.find((product) => product.id === id);
+    console.log("product", product);
+    this.items.push(product);
+
+    const productCount = {};
+
+    //check if the product is already there to increment by 1
+    // or set to 1 otherwise
+    this.items.forEach((item) => {
+      productCount[item.id] = (productCount[item.id] || 0) + 1;
+    });
+
+    // display product when clicked on its btn
+    // if more than 1 clicked, show number of time user select same items
+    const numberOfClickedOnProduct = productCount[product.id];
+    console.log("numberOfClickedOnProduct", numberOfClickedOnProduct);
+    // get same product-count elt
+    const sameProductCount = document.getElementById(
+      `same-product-count-for${id}`
+    );
+    console.log("sameProductCount", sameProductCount);
+    numberOfClickedOnProduct > 1
+      ? (sameProductCount.textContent = `${numberOfClickedOnProduct}x`)
+      : (selectedProductsContainer.innerHTML += `<div>
+      <p> <span class="same-product-count"
+      id="same-product-count-for${id}"></span>
+      ${product.name}</p>
+      <p>${product.price}</p>
+      </div>`);
+  }
+
+  getCount() {
+    return this.items.length;
+  }
+
+  calculateSubTotal() {}
+  calculateTotal() {}
+}
+
+const cart = new ShoppingCart();
+
+const addToCartBtn = document.getElementsByClassName("btn add-to-cart-btn");
+
+// Note addtoCatBtns is an array-like not real array
+//hence we need to convert it to array in order to be able to loop
+//thru it
+[...addToCartBtn].forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    console.log("event", event.target.id);
+    cart.addProduct(Number(event.target.id), products);
+    totalItems.textContent = cart.getCount();
+  });
+});
+
+cartBtn.addEventListener("click", () => {
+  isCartShowing = !isCartShowing;
+  showHideCart.textContent = isCartShowing ? "Hide" : "Show";
+  cartContainer.style.display = isCartShowing ? "block" : "none";
 });
