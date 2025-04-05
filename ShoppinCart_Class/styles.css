@@ -82,6 +82,7 @@ body {
   overflow-y: scroll;
   text-align: center;
   font-size: 1.2rem;
+  display: none;
 }
 
 /* #clear-cart-btn {
@@ -98,6 +99,10 @@ body {
 }
 .product-category {
   margin: 10px 0;
+}
+.sum-section {
+  border-top: 4px dotted var(--dark-grey);
+  padding: 10px;
 }
 
 @media (min-width: 768px) {

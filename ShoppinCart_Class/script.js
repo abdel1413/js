@@ -5,9 +5,12 @@ const cartContainer = document.getElementById("cart-container");
 const selectedProductsContainer = document.getElementById(
   "selected-products-container"
 );
-
+const addToCartBtn = document.getElementsByClassName("btn add-to-cart-btn");
 const totalItems = document.getElementById("total-items");
-
+const subTotal = document.getElementById("sub-total");
+const taxes = document.getElementById("taxes");
+const total = document.getElementById("total");
+const clearBtn = document.getElementById("clear-cart-btn");
 let isCartShowing = false;
 
 const products = [
@@ -105,7 +108,7 @@ class ShoppingCart {
 
   addProduct(id, products) {
     const product = products.find((product) => product.id === id);
-    console.log("product", product);
+
     this.items.push(product);
 
     const productCount = {};
@@ -119,17 +122,17 @@ class ShoppingCart {
     // display product when clicked on its btn
     // if more than 1 clicked, show number of time user select same items
     const numberOfClickedOnProduct = productCount[product.id];
-    console.log("numberOfClickedOnProduct", numberOfClickedOnProduct);
+
     // get same product-count elt
     const sameProductCount = document.getElementById(
-      `same-product-count-for${id}`
+      `same-product-count-for-id${id}`
     );
-    console.log("sameProductCount", sameProductCount);
+
     numberOfClickedOnProduct > 1
-      ? (sameProductCount.textContent = `${numberOfClickedOnProduct}x`)
+      ? (sameProductCount.textContent = `${numberOfClickedOnProduct}x `)
       : (selectedProductsContainer.innerHTML += `<div>
-      <p> <span class="same-product-count"
-      id="same-product-count-for${id}"></span>
+      <p><span class="same-product-count"
+      id="same-product-count-for-id${id}"></span>
       ${product.name}</p>
       <p>${product.price}</p>
       </div>`);
@@ -139,27 +142,59 @@ class ShoppingCart {
     return this.items.length;
   }
 
-  calculateSubTotal() {}
-  calculateTotal() {}
+  calculateTaxes(amount) {
+    return parseFloat((this.taxRate / 100) * amount).toFixed(2);
+  }
+
+  calculateTotal() {
+    const subtotal = this.items.reduce((total, item) => total + item.price, 0);
+
+    const tax = this.calculateTaxes(subtotal);
+    this.total = subtotal + tax;
+    subTotal.textContent = ` $${subtotal.toFixed(2)}`;
+    taxes.textContent = ` $${tax}`;
+    total.textContent = ` $${this.total}`;
+    return this.total;
+  }
+
+  clearALl() {
+    if (!this.items.length) {
+      alert("Your shopping cart is already empty");
+      return;
+    } else {
+      const yesClear = confirm(
+        "Are you sure you want clear all items in your cart?"
+      );
+      if (yesClear) {
+        this.items = [];
+        selectedProductsContainer.textContent = "";
+        totalItems.textContent = ` $0`;
+        subTotal.textContent = ` $0`;
+        taxes.textContent = ` $0`;
+        total.textContent = ` $0`;
+      }
+    }
+  }
 }
 
 const cart = new ShoppingCart();
-
-const addToCartBtn = document.getElementsByClassName("btn add-to-cart-btn");
 
 // Note addtoCatBtns is an array-like not real array
 //hence we need to convert it to array in order to be able to loop
 //thru it
 [...addToCartBtn].forEach((btn) => {
   btn.addEventListener("click", (event) => {
-    console.log("event", event.target.id);
     cart.addProduct(Number(event.target.id), products);
     totalItems.textContent = cart.getCount();
+    cart.calculateTotal();
   });
 });
 
+console.log(isCartShowing);
 cartBtn.addEventListener("click", () => {
   isCartShowing = !isCartShowing;
   showHideCart.textContent = isCartShowing ? "Hide" : "Show";
   cartContainer.style.display = isCartShowing ? "block" : "none";
 });
+
+clearBtn.addEventListener("click", cart.clearALl.bind(cart));
