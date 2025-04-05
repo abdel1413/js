@@ -11,6 +11,7 @@ const subTotal = document.getElementById("sub-total");
 const taxes = document.getElementById("taxes");
 const total = document.getElementById("total");
 const clearBtn = document.getElementById("clear-cart-btn");
+const sumSection = document.getElementById("sum-section");
 let isCartShowing = false;
 
 const products = [
@@ -136,6 +137,8 @@ class ShoppingCart {
       ${product.name}</p>
       <p>${product.price}</p>
       </div>`);
+
+    sumSection.style.borderTop = `2px double black`;
   }
 
   getCount() {
@@ -167,6 +170,7 @@ class ShoppingCart {
       );
       if (yesClear) {
         this.items = [];
+        sumSection.style.borderTop = `none`;
         selectedProductsContainer.textContent = "";
         totalItems.textContent = ` $0`;
         subTotal.textContent = ` $0`;
@@ -190,11 +194,9 @@ const cart = new ShoppingCart();
   });
 });
 
-console.log(isCartShowing);
 cartBtn.addEventListener("click", () => {
   isCartShowing = !isCartShowing;
   showHideCart.textContent = isCartShowing ? "Hide" : "Show";
   cartContainer.style.display = isCartShowing ? "block" : "none";
 });
-
 clearBtn.addEventListener("click", cart.clearALl.bind(cart));

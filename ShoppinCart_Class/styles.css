@@ -100,8 +100,7 @@ body {
 .product-category {
   margin: 10px 0;
 }
-.sum-section {
-  border-top: 4px dotted var(--dark-grey);
+#sum-section {
   padding: 10px;
 }
 
